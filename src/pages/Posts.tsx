@@ -1,14 +1,19 @@
-import React, { FC } from 'react'
-import { LinearProgress, List, Typography } from '@material-ui/core'
+import React, { ChangeEvent, FC, useState } from 'react'
+import { FormControl, Grid, InputLabel, LinearProgress, List, MenuItem, Select, Typography } from '@material-ui/core'
+import { API_URL } from 'index'
 import useSWR from 'swr'
 
 import Layout from 'components/Layout'
 import PostListItem from 'components/PostListItem'
 import { Post } from 'types/post'
-import { API_URL } from 'utils/fetchItems'
 
 const Posts: FC = () => {
 	const { data: posts } = useSWR<Post[]>(`${API_URL}/posts`)
+	const [filter, setFilter] = useState<string>('NO_FILTER')
+
+	const handleFilterChange = (event: ChangeEvent<{ value: unknown }>) => {
+		setFilter(event.target.value as string)
+	}
 
 	if (!posts) {
 		return <LinearProgress />
@@ -22,13 +27,38 @@ const Posts: FC = () => {
 				</Typography>
 			) : (
 				<>
-					<Typography gutterBottom variant="h5" align="center">
-						Today's posts
-					</Typography>
+					<Grid container justify="space-between" spacing={2} alignItems="center">
+						<Grid item>
+							<Typography gutterBottom variant="h5" align="center">
+								Today's posts
+							</Typography>
+						</Grid>
+						<Grid item>
+							<FormControl variant="outlined">
+								<InputLabel id="filter-select">Filter by</InputLabel>
+								<Select labelId="filter-select" value={filter} onChange={handleFilterChange} label="Filter">
+									<MenuItem value="NO_FILTER">No filter</MenuItem>
+									<MenuItem value="ALPHABETICAL">Alphabetical</MenuItem>
+									<MenuItem disabled value="DATE">
+										By date
+									</MenuItem>
+								</Select>
+							</FormControl>
+						</Grid>
+					</Grid>
+
 					<List>
-						{posts.map(({ id, title, body, ...otherProps }) => (
-							<PostListItem key={id} id={id} title={title} body={body} {...otherProps}></PostListItem>
-						))}
+						{posts
+							.sort((a, b) => {
+								if (filter === 'ALPHABETICAL') {
+									return a.title.localeCompare(b.title)
+								}
+
+								return a.id.toString().localeCompare(b.id.toString())
+							})
+							.map(({ id, title, body, ...otherProps }) => (
+								<PostListItem key={id} id={id} title={title} body={body} {...otherProps}></PostListItem>
+							))}
 					</List>
 				</>
 			)}

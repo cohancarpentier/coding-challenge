@@ -30,5 +30,6 @@ You can then open your browser at https://localhost:3000/
 - Localization (i18n)
 - Login form validation (probably with react-hook-form)
 - Support pagination
-- Integrate some sort of global state
-- Potentially write `use¨Posts` & `useAlbums` hooks
+- Integrate some sort of global state (although probably no needed with current requirements)
+- Query params for filters
+- Lazy-loading or some other sort of virtualization for better list performance

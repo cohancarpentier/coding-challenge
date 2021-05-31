@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router'
 import { Button, Card, CardActions, CardContent, LinearProgress, makeStyles, Typography } from '@material-ui/core'
+import { API_URL } from 'index'
 import useSWR from 'swr'
 
 import Layout from 'components/Layout'
 import { Album } from 'types/album'
-import { API_URL } from 'utils/fetchItems'
 
 const useStyles = makeStyles(() => ({
 	card: {

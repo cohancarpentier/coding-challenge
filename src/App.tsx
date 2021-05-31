@@ -4,7 +4,7 @@ import { SWRConfig } from 'swr'
 
 import Routes from './Routes'
 
-const fetcher = (url) => fetch(url).then((r) => r.json())
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const App: FC = () => (
 	<SWRConfig

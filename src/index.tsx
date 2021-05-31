@@ -4,12 +4,21 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 
 import App from './App'
 
+export const API_URL = 'https://jsonplaceholder.typicode.com'
+
 const theme = createMuiTheme({
 	props: {
-		// Name of the component ⚛️
 		MuiButtonBase: {
-			// The properties to apply
-			disableRipple: true, // No more ripple, on the whole application 💣!
+			disableRipple: true,
+		},
+	},
+	overrides: {
+		MuiInputLabel: {
+			outlined: {
+				backgroundColor: '#fff',
+				paddingLeft: 2,
+				paddingRight: 8,
+			},
 		},
 	},
 })
