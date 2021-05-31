@@ -33,3 +33,5 @@ You can then open your browser at https://localhost:3000/
 - Integrate some sort of global state (although probably no needed with current requirements)
 - Query params for filters
 - Lazy-loading or some other sort of virtualization for better list performance
+- E2E tests
+- Improve mobile UX & responsivity
