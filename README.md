@@ -5,6 +5,8 @@ This application is built using CRA and TypeScript.
 See it live:
 https://nesto-coding-challenge.netlify.app
 
+(Note: refreshing on Netlify can crash the application if you're not on the root)
+
 ## What is this?
 
 <img src="./docs/screenshot.png" />
@@ -33,3 +35,5 @@ You can then open your browser at https://localhost:3000/
 - Integrate some sort of global state (although probably no needed with current requirements)
 - Query params for filters
 - Lazy-loading or some other sort of virtualization for better list performance
+- E2E tests
+- Improve mobile UX & responsivity
