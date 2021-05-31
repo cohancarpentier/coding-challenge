@@ -4,7 +4,7 @@ import { Button, Card, CardActions, CardContent, LinearProgress, makeStyles, Typ
 import { API_URL } from 'index'
 import useSWR from 'swr'
 
-import Layout from 'components/Layout'
+import { Layout } from 'components'
 import { Album } from 'types/album'
 
 const useStyles = makeStyles(() => ({

@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router'
 import {
 	Avatar,
@@ -14,7 +15,7 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-import Copyright from 'components/Copyright'
+import { Copyright } from 'components'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -49,9 +50,23 @@ const useStyles = makeStyles((theme) => ({
 const Login: FC = () => {
 	const classes = useStyles()
 	const history = useHistory()
+	const { register, watch } = useForm()
+	const [loading, setLoading] = useState<boolean>(false)
+	const watchUsername = watch('username', false)
+	const watchPassword = watch('password', false)
 
 	const goToPosts = () => {
 		history.replace('/posts')
+	}
+
+	const onSubmit = (e) => {
+		e.preventDefault()
+		setLoading(true)
+
+		// Simulate login flow
+		setTimeout(() => {
+			goToPosts()
+		}, 1000)
 	}
 
 	return (
@@ -68,7 +83,7 @@ const Login: FC = () => {
 						Sign in
 					</Typography>
 
-					<form className={classes.form} onSubmit={goToPosts} noValidate>
+					<form className={classes.form} onSubmit={onSubmit} noValidate>
 						<TextField
 							variant="outlined"
 							margin="normal"
@@ -76,9 +91,13 @@ const Login: FC = () => {
 							fullWidth
 							id="email"
 							label="Email address"
-							name="email"
 							autoComplete="email"
+							disabled={loading}
+							inputProps={{
+								'aria-required': true,
+							}}
 							autoFocus
+							{...register('username', { required: true })}
 						/>
 
 						<TextField
@@ -86,14 +105,21 @@ const Login: FC = () => {
 							margin="normal"
 							required
 							fullWidth
-							name="password"
 							label="Password"
 							type="password"
 							id="password"
 							autoComplete="current-password"
+							disabled={loading}
+							inputProps={{
+								'aria-required': true,
+							}}
+							{...register('password', { required: true })}
 						/>
 
-						<FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+						<FormControlLabel
+							control={<Checkbox disabled={loading} value="remember" color="primary" />}
+							label="Remember me"
+						/>
 
 						<Button
 							disableElevation
@@ -101,6 +127,7 @@ const Login: FC = () => {
 							fullWidth
 							variant="contained"
 							color="primary"
+							disabled={loading || !(watchUsername && watchPassword)}
 							className={classes.submit}
 						>
 							Sign In

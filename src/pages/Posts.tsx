@@ -3,13 +3,28 @@ import { FormControl, Grid, InputLabel, LinearProgress, List, MenuItem, Select, 
 import { API_URL } from 'index'
 import useSWR from 'swr'
 
-import Layout from 'components/Layout'
-import PostListItem from 'components/PostListItem'
+import { Layout, PostListItem } from 'components'
 import { Post } from 'types/post'
 
 const Posts: FC = () => {
 	const { data: posts } = useSWR<Post[]>(`${API_URL}/posts`)
 	const [filter, setFilter] = useState<string>('NO_FILTER')
+
+	const filters = [
+		{
+			key: 'NO_FILTER',
+			label: 'No filter',
+		},
+		{
+			key: 'ALPHABETICAL',
+			label: 'Alphabetical',
+		},
+		{
+			key: 'DATE',
+			label: 'By date',
+			isDisabled: true,
+		},
+	]
 
 	const handleFilterChange = (event: ChangeEvent<{ value: unknown }>) => {
 		setFilter(event.target.value as string)
@@ -37,11 +52,11 @@ const Posts: FC = () => {
 							<FormControl variant="outlined">
 								<InputLabel id="filter-select">Filter by</InputLabel>
 								<Select labelId="filter-select" value={filter} onChange={handleFilterChange} label="Filter">
-									<MenuItem value="NO_FILTER">No filter</MenuItem>
-									<MenuItem value="ALPHABETICAL">Alphabetical</MenuItem>
-									<MenuItem disabled value="DATE">
-										By date
-									</MenuItem>
+									{filters.map(({ key, label, isDisabled }) => (
+										<MenuItem key={key} disabled={isDisabled} value={key}>
+											{label}
+										</MenuItem>
+									))}
 								</Select>
 							</FormControl>
 						</Grid>

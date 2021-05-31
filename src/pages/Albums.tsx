@@ -3,8 +3,7 @@ import { Grid, LinearProgress, Typography } from '@material-ui/core'
 import { API_URL } from 'index'
 import useSWR from 'swr'
 
-import AlbumListItem from 'components/AlbumListItem'
-import Layout from 'components/Layout'
+import { AlbumListItem, Layout } from 'components'
 import { Album } from 'types/album'
 import { Photo } from 'types/photo'
 
