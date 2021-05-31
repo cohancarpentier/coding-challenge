@@ -1,22 +1,14 @@
-import React, { FC, useState } from 'react'
-import { useAsync } from 'react-use'
+import React, { FC } from 'react'
 import { LinearProgress, List, Typography } from '@material-ui/core'
+import useSWR from 'swr'
 
 import Layout from 'components/Layout'
 import PostListItem from 'components/PostListItem'
 import { Post } from 'types/post'
-import fetchItems from 'utils/fetchItems'
+import { API_URL } from 'utils/fetchItems'
 
 const Posts: FC = () => {
-	const [posts, setPosts] = useState<Post[]>()
-
-	useAsync(async () => {
-		setPosts(
-			await fetchItems({
-				type: 'posts',
-			}),
-		)
-	}, [])
+	const { data: posts } = useSWR<Post[]>(`${API_URL}/posts`)
 
 	if (!posts) {
 		return <LinearProgress />

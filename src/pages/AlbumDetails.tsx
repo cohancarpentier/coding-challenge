@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router'
 import { Button, Card, CardActions, CardContent, LinearProgress, makeStyles, Typography } from '@material-ui/core'
+import useSWR from 'swr'
 
 import Layout from 'components/Layout'
-import useAlbum from 'hooks/useAlbum'
+import { Album } from 'types/album'
+import { API_URL } from 'utils/fetchItems'
 
 const useStyles = makeStyles(() => ({
 	card: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles(() => ({
 const AlbumDetails: FC = () => {
 	const { albumId } = useParams<Record<string, string | undefined>>()
 	const classes = useStyles()
-	const album = useAlbum(albumId)
+	const { data: album } = useSWR<Album>(`${API_URL}/posts/${albumId}`)
 
 	if (!album) {
 		return <LinearProgress />

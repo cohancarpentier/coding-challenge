@@ -6,7 +6,7 @@ import DescriptionIcon from '@material-ui/icons/Description'
 import { Post } from 'types/post'
 
 const PostListItem: FC<Partial<Post>> = ({ title, id, body }) => (
-	<Link to={`/posts/${id}`} style={{ textDecoration: 'none' }}>
+	<Link data-testid="post-link" to={`/posts/${id}`} style={{ textDecoration: 'none' }}>
 		<ListItem>
 			<ListItemAvatar>
 				<Avatar>

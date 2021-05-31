@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router'
 import { Button, Card, CardActions, CardContent, LinearProgress, makeStyles, Typography } from '@material-ui/core'
+import useSWR from 'swr'
 
 import Layout from 'components/Layout'
-import usePost from 'hooks/usePost'
+import { Post } from 'types/post'
+import { API_URL } from 'utils/fetchItems'
 
 const useStyles = makeStyles(() => ({
 	card: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles(() => ({
 const PostDetails: FC = () => {
 	const { postId } = useParams<Record<string, string | undefined>>()
 	const classes = useStyles()
-	const post = usePost(postId)
+	const { data: post } = useSWR<Post>(`${API_URL}/posts/${postId}`)
 
 	if (!post) {
 		return <LinearProgress />

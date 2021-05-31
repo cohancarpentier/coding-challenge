@@ -1,12 +1,14 @@
 import React, { FC } from 'react'
 import { Grid, LinearProgress, Typography } from '@material-ui/core'
+import useSWR from 'swr'
 
 import AlbumListItem from 'components/AlbumListItem'
 import Layout from 'components/Layout'
-import useAlbums from 'hooks/useAlbums'
+import { Album } from 'types/album'
+import { API_URL } from 'utils/fetchItems'
 
 const Albums: FC = () => {
-	const albums = useAlbums()
+	const { data: albums } = useSWR<Album[]>(`${API_URL}/posts`)
 
 	if (!albums) {
 		return <LinearProgress />
