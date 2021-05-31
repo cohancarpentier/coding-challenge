@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-import Copyright from './../components/Copyright'
+import Copyright from 'components/Copyright'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 	image: {
 		backgroundImage: 'url(https://source.unsplash.com/random)',
 		backgroundRepeat: 'no-repeat',
-		backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+		backgroundColor: theme.palette.grey[50],
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	},
@@ -51,7 +51,7 @@ const Login: FC = () => {
 	const history = useHistory()
 
 	const goToPosts = () => {
-		history.push('/posts')
+		history.replace('/posts')
 	}
 
 	return (
