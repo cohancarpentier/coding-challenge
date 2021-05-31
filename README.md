@@ -2,6 +2,9 @@
 
 This application is built using CRA and TypeScript.
 
+See it live:
+https://nesto-coding-challenge.netlify.app
+
 ## What is this?
 
 <img src="./docs/screenshot.png" />
