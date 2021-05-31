@@ -5,6 +5,8 @@ This application is built using CRA and TypeScript.
 See it live:
 https://nesto-coding-challenge.netlify.app
 
+(Note: refreshing on Netlify can crash the application if you're not on the root)
+
 ## What is this?
 
 <img src="./docs/screenshot.png" />
