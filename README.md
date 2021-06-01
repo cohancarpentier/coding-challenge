@@ -30,7 +30,7 @@ You can then open your browser at https://localhost:3000/
 ## Potential improvements
 
 - Localization (i18n)
-- Login form validation (probably with react-hook-form)
+- Login form validation
 - Support pagination
 - Integrate some sort of global state (although probably no needed with current requirements)
 - Query params for filters
@@ -38,5 +38,9 @@ You can then open your browser at https://localhost:3000/
 - E2E tests
 - Improve mobile UX & responsivity
 - More unit tests
+
+## Personnal comments
+
+First time using `react-hook-form` and `swr`, so I had a fair bit of documentation to read beforehand, but this was interesting.
 
 _Time spent: around 2 hours_
