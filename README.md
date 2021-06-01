@@ -38,3 +38,5 @@ You can then open your browser at https://localhost:3000/
 - E2E tests
 - Improve mobile UX & responsivity
 - More unit tests
+
+_Time spent: around 2 hours_
